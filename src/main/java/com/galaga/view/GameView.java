@@ -1,6 +1,7 @@
 package main.java.com.galaga.view;
 
 import main.java.com.galaga.presenter.*;
+import main.java.com.galaga.model.HighScore;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -42,6 +43,38 @@ public class GameView extends JPanel implements ActionListener, KeyListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawGame(g);
+    }
+
+    public void showHighScoreDialog(int score, int level) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            NameInputDialog dialog = new NameInputDialog(parentFrame, score, level);
+            dialog.setVisible(true);
+            
+            if (dialog.wasSubmitted()) {
+                presenter.onHighScoreSubmitted(dialog.getPlayerName(), score, level);
+            }
+        });
+    }
+
+    public void showHighScoreSuccess() {
+        SwingUtilities.invokeLater(() -> {
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            JOptionPane.showMessageDialog(parentFrame, 
+                "🎉 ¡High Score guardado exitosamente! 🎉", 
+                "¡Éxito!", 
+                JOptionPane.INFORMATION_MESSAGE);
+        });
+    }
+
+    public void showHighScoreError() {
+        SwingUtilities.invokeLater(() -> {
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            JOptionPane.showMessageDialog(parentFrame, 
+                "❌ Error al guardar el high score. Inténtalo de nuevo.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        });
     }
     
     private void drawGame(Graphics g) {
