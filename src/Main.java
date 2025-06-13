@@ -1,5 +1,5 @@
+import main.java.com.galaga.view.*;
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class Main {
         frame.setResizable(false);
         
         // Mostrar primero la pantalla de título
-        GalagaTitleScreen titleScreen = new GalagaTitleScreen();
+        TitleScreenView titleScreen = new TitleScreenView();
         frame.add(titleScreen);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -18,7 +18,7 @@ public class Main {
         Timer checkStart = new Timer(100, e -> {
             if (titleScreen.isStartGame()) {
                 frame.remove(titleScreen);
-                GalagaGame game = new GalagaGame();
+                GameView game = new GameView();
                 frame.add(game);
                 frame.revalidate();
                 frame.repaint();

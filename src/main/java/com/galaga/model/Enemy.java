@@ -1,3 +1,5 @@
+package main.java.com.galaga.model;
+
 import java.awt.*;
 
 public class Enemy {

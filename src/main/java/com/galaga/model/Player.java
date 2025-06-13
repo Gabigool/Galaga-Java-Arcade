@@ -1,10 +1,12 @@
+package main.java.com.galaga.model;
+
 import java.awt.*;
 
 public class Player {
     private int x, y;
     private static final int WIDTH = 50;
     private static final int HEIGHT = 30;
-    private static final int SPEED = 3; // Velocidad reducida para movimiento más suave
+    private static final int SPEED = 3;
     
     public Player(int x, int y) {
         this.x = x;

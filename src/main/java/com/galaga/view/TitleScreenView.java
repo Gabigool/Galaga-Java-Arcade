@@ -1,19 +1,29 @@
-import javax.swing.*;
+package main.java.com.galaga.view;
+
+import main.java.com.galaga.presenter.TitleScreenPresenter;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
-public class GalagaTitleScreen extends JPanel implements KeyListener {
-    private boolean startGame = false;
-    private int animationCounter = 0;
+public class TitleScreenView extends JPanel implements KeyListener {
+    private TitleScreenPresenter presenter;
     private boolean showPress = true;
     
-    public GalagaTitleScreen() {
+    public TitleScreenView() {
+        setupView();
+        this.presenter = new TitleScreenPresenter();
+        this.presenter.setView(this);
+        startAnimation();
+    }
+    
+    private void setupView() {
         this.setPreferredSize(new Dimension(800, 600));
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.addKeyListener(this);
-        
-        // Timer para animación del texto parpadeante
+    }
+    
+    private void startAnimation() {
         Timer animationTimer = new Timer(500, e -> {
             showPress = !showPress;
             repaint();
@@ -73,9 +83,7 @@ public class GalagaTitleScreen extends JPanel implements KeyListener {
     
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            startGame = true;
-        }
+        presenter.onKeyPressed(e.getKeyCode());
     }
     
     @Override
@@ -85,10 +93,10 @@ public class GalagaTitleScreen extends JPanel implements KeyListener {
     public void keyTyped(KeyEvent e) {}
     
     public boolean isStartGame() {
-        return startGame;
+        return presenter.isStartGame();
     }
     
     public void resetStartGame() {
-        startGame = false;
+        presenter.resetStartGame();
     }
 }

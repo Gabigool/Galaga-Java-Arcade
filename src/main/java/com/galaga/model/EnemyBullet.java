@@ -1,22 +1,24 @@
+package main.java.com.galaga.model;
+
 import java.awt.*;
 
-public class Bullet {
+public class EnemyBullet {
     private int x, y;
     private static final int WIDTH = 4;
-    private static final int HEIGHT = 10;
-    private static final int SPEED = 7;
+    private static final int HEIGHT = 8;
+    private static final int SPEED = 3;
     
-    public Bullet(int x, int y) {
+    public EnemyBullet(int x, int y) {
         this.x = x;
         this.y = y;
     }
     
     public void move() {
-        y -= SPEED;
+        y += SPEED;
     }
     
     public void draw(Graphics g) {
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.ORANGE);
         g.fillRect(x, y, WIDTH, HEIGHT);
     }
     
