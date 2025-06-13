@@ -48,7 +48,7 @@ Una implementación completa del clásico juego arcade **Galaga** desarrollada e
 - No requiere dependencias externas
 
 ### Ejecución
-1. Ve a [Releases](https://github.com/tu-usuario/galaga-java-arcade/releases)
-2. Descarga `galaga-game.jar`
+1. Ve a [Releases](https://github.com/Gabriel-dev-hub/Galaga-Java-Arcade/tree/main/Releases)
+2. Descarga `GalagaGame.jar`
 3. Asegúrate de tener Java 8+ instalado
 4. Ejecuta con doble clic o: `java -jar galaga-game.jar`
