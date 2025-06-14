@@ -4,7 +4,7 @@ Una implementación completa del clásico juego arcade **Galaga** desarrollada e
 
 ![Java](https://img.shields.io/badge/Java-17+-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![Status](https://img.shields.io/badge/Status-Complete-green.svg)
+![Status](https://img.shields.io/badge/Status-Incomplete-red.svg)
 
 ## 🎮 Características
 
