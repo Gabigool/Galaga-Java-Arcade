@@ -13,10 +13,10 @@ public class TitleScreenPresenter {
     // Estados del menú
     private int selectedOption = 0;
     private final String[] menuOptions = {
-        "🎮 JUGAR",
-        "🏆 HIGH SCORES", 
-        "❓ CÓMO JUGAR",
-        "❌ SALIR"
+        "JUGAR",
+        "HIGH SCORES", 
+        "CÓMO JUGAR",
+        "SALIR"
     };
     
     private boolean startGame = false;

@@ -26,6 +26,9 @@ public class GamePresenter {
     private static final int BOARD_WIDTH = 800;
     private static final int BOARD_HEIGHT = 600;
 
+    private boolean returnToMenu = false;
+    private boolean isPaused = false;
+
     private HighScoreRepository highScoreRepository;
 
     public GamePresenter() {
@@ -54,6 +57,7 @@ public class GamePresenter {
 
     public void restartGame() {
         pressedKeys.clear();
+        isPaused = false;
         initGame();
     }
 
@@ -80,9 +84,14 @@ public class GamePresenter {
         }
     }
 
-    public void handleContinuousInput() {
+    private void handleContinuousInput() {
+        // MODIFICADO - No procesar entrada continua si está pausado
+        if (isPaused) {
+            return;
+        }
+        
         long currentTime = System.currentTimeMillis();
-
+        
         if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
             player.moveLeft();
         }
@@ -98,7 +107,7 @@ public class GamePresenter {
     }
 
     public void update() {
-        if (!gameOver) {
+        if (!gameOver && !isPaused) {
             handleContinuousInput();
             updateGameObjects();
             checkCollisions();
@@ -199,14 +208,44 @@ public class GamePresenter {
 
     public void onKeyPressed(int keyCode) {
         pressedKeys.add(keyCode);
-
-        if (keyCode == KeyEvent.VK_R && gameOver) {
-            restartGame();
+        
+        if (gameOver) {
+            if (keyCode == KeyEvent.VK_R) {
+                restartGame();
+            } else if (keyCode == KeyEvent.VK_M) {
+                onReturnToMenu();
+            }
+        } else {
+            if (keyCode == KeyEvent.VK_P || keyCode == KeyEvent.VK_ESCAPE) {
+                togglePause();
+            }
         }
     }
 
     public void onKeyReleased(int keyCode) {
         pressedKeys.remove(keyCode);
+    }
+
+    private void togglePause() {
+        isPaused = !isPaused;
+    }
+
+    public void onReturnToMenu() {
+        returnToMenu = true;
+        isPaused = false;
+        pressedKeys.clear();
+    }
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public boolean shouldReturnToMenu() {
+        return returnToMenu;
+    }
+
+    public void resetReturnToMenu() {
+        returnToMenu = false;
     }
 
     // Getters para que la vista acceda a los datos
